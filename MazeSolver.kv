@@ -1,0 +1,40 @@
+<MazeDisplay>:
+	orientation : 'horizontal'
+	id : mazedisplay
+	textinput : text_in
+	infolbl : info_lbl
+	BoxLayout:
+		size_hint_y : 0.3
+		size_hint_x : 0.3
+		spacing : 5
+		orientation : 'vertical'
+		TextInput:
+			id : text_in
+			text : 'Maze.txt'
+		Button:
+			size_hint_y : 0.5
+			text : 'Start'
+			on_press :
+				mazedisplay.start()
+		BoxLayout:
+			size_hint_y : 0.5 
+			spacing : 2
+			Button:
+				text : 'Clear'
+				on_press :
+					mazedisplay.clear()
+			Button:
+				text : 'Generate'
+				on_press :
+					mazedisplay.generate_maze()
+		Button :
+			size_hint_y : 0.5
+			text : 'Show A* route'
+		Button:
+			size_hint_y : 0.5
+			text : 'Show BFS route'
+	Label : 
+		id : info_lbl
+		text: '[b][color=0f0c0c]Insert maze file in text input'
+		markup : True
+
