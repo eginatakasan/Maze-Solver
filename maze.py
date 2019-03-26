@@ -62,4 +62,4 @@ class MazeSolverApp(App):
 		return MazeDisplay()
 
 if __name__ == "__main__":
-	MazeSolverApp().run()
+	MazeSolverApp(kv_file="MazeSolver.kv").run()
