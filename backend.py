@@ -16,9 +16,9 @@ class Node():
             
 
 #read maze from file
-def readMaze():
+def readMaze(file_name):
     matrix=[]
-    f = open("maze.txt", "r")
+    f = open(file_name, "r")
     for x in f:
         matrix.append(list(x.strip()))
     return matrix
@@ -34,8 +34,10 @@ def bfs(matrix, visited, start_x, start_y, finish_x, finish_y):
         # print(arr)
         queue.pop(0)
         queue_visited.append(arr)
+        # print(queue_visited[len(queue_visited)-1].x, queue_visited[len(queue_visited)-1].y)
 
         if arr.x==finish_x and arr.y==finish_y:
+            # print("ketemu")
             path=[]
             current = arr
             while current.parent_x is not None:
@@ -53,9 +55,10 @@ def bfs(matrix, visited, start_x, start_y, finish_x, finish_y):
         for pos in [(0,-1), (0,1), (-1,0), (1,0)]:
             x = arr.x+pos[0]
             y = arr.y+pos[1]
-            if x<0 or x>=len(visited[0]):
+            # print(x,y)
+            if x<0 or x>=len(visited):
                 continue
-            if y<0 or y>=len(visited):
+            if y<0 or y>=len(visited[0]):
                 continue
             if visited[x][y]==False:
                 visited[x][y]=True
@@ -112,12 +115,22 @@ def astar(matrix, visited, start_x, start_y, finish_x, finish_y):
                 f=g+h
                 queue.append((child,f,g,h))
 
+def searchStart(matrix):
+    for i in range (0, len(matrix)):
+        if(matrix[i][0]=='0'):
+            return i,0
+
+def searchFinish(matrix):
+    for i in range (0, len(matrix)):
+        if (matrix[i][len(matrix)-1]=='0'):
+            return i, (len(matrix)-1)
+
 
 if __name__ == "__main__":
-    matrix = readMaze()
-    print(len(matrix[0]), len(matrix))
-    print(matrix)
-    visited1 = [[False for x in range (len(matrix[0]))] for y in range (len(matrix))]
+    matrix = readMaze("maze.txt")
+    # print(len(matrix[0]), len(matrix))
+    # print(matrix)
+    visited1=[[False for x in range (len(matrix[0]))] for y in range (len(matrix))]
     visited2 = [[False for x in range (len(matrix[0]))] for y in range (len(matrix))]
     for i in range (0, len(visited1)):
         for j in range (0, len(visited1[0])):
@@ -126,11 +139,12 @@ if __name__ == "__main__":
                 # print(i,j)
                 visited1[i][j]=True
                 visited2[i][j]=True
-    # print(visited)
-    # queue = []
+    #point start and finish
+    start_x, start_y = searchStart(matrix)
+    finish_x,finish_y = searchFinish(matrix)
     #bfs
-    # queue_visited = bfs(matrix, visited1, 1, 0, 9, 10)
-    # print(queue_visited)
+    path_bfs = bfs(matrix, visited1, start_x, start_y, finish_x, finish_y)
+    print(path_bfs)
     #astar
-    queue_visited=astar(matrix, visited2, 1, 0, 9, 10)
-    print(queue_visited)
+    path_astar=astar(matrix, visited2, start_x, start_y, finish_x, finish_y)
+    print(path_astar)
