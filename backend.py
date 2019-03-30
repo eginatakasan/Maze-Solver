@@ -76,13 +76,13 @@ def astar(matrix, visited, start_x, start_y, finish_x, finish_y):
     queue_visited=[]
     visited[start_x][start_y]=True
     while queue:
-        visiting_idx=0
-        for i in range (0,len(queue)): #cari f minimum
-            if(queue[i][1]<queue[visiting_idx][1]):
-                visiting_idx=i
+        imin=0
+        for i in range (1,len(queue)): #cari f minimum
+            if(queue[i][1]<queue[imin][1]):
+                imin=i
         
-        arr = queue[i]
-        queue.pop(i)
+        arr = queue[imin]
+        queue.pop(imin)
         queue_visited.append(arr[0])
 
         if(arr[0].x==finish_x and arr[0].y==finish_y):
