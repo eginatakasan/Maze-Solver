@@ -102,7 +102,6 @@ class MazeDisplay(BoxLayout):
 			start_x, start_y = searchStart(self.matrix)
 			finish_x, finish_y = searchFinish(self.matrix)
 			bfs_result = bfs(self.matrix, self.visited, start_x, start_y, finish_x, finish_y)
-			print(bfs_result)
 		self.replace_list_of_char(bfs_result)
 	
 class MazeSolverApp(App):
