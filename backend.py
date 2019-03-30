@@ -125,27 +125,3 @@ def searchFinish(matrix):
     for i in range (0, len(matrix)):
         if (matrix[i][len(matrix)-1]=='0'):
             return i, (len(matrix)-1)
-
-
-if __name__ == "__main__":
-    matrix = readMaze("maze.txt")
-    # print(len(matrix[0]), len(matrix))
-    # print(matrix)
-    visited1=[[False for x in range (len(matrix[0]))] for y in range (len(matrix))]
-    visited2 = [[False for x in range (len(matrix[0]))] for y in range (len(matrix))]
-    for i in range (0, len(visited1)):
-        for j in range (0, len(visited1[0])):
-            # print(i,j)
-            if(matrix[i][j]=='1'):
-                # print(i,j)
-                visited1[i][j]=True
-                visited2[i][j]=True
-    #point start and finish
-    start_x, start_y = searchStart(matrix)
-    finish_x,finish_y = searchFinish(matrix)
-    #bfs
-    path_bfs = bfs(matrix, visited1, start_x, start_y, finish_x, finish_y)
-    print(path_bfs)
-    #astar
-    path_astar=astar(matrix, visited2, start_x, start_y, finish_x, finish_y)
-    print(path_astar)
