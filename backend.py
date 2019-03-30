@@ -115,6 +115,7 @@ def astar(matrix, visited, start_x, start_y, finish_x, finish_y):
                 f=g+h
                 queue.append((child,f,g,h))
 
+
 def searchStart(matrix):
     for i in range (0, len(matrix)):
         if(matrix[i][0]=='0'):

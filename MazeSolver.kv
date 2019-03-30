@@ -12,11 +12,6 @@
 		TextInput:
 			id : text_in
 			text : 'Maze.txt'
-		Button:
-			size_hint_y : 0.5
-			text : 'Start'
-			on_press :
-				mazedisplay.start()
 		BoxLayout:
 			size_hint_y : 0.5 
 			spacing : 2
@@ -31,9 +26,13 @@
 		Button :
 			size_hint_y : 0.5
 			text : 'Show A* route'
+			on_press:
+				mazedisplay.compute_astar()
 		Button:
 			size_hint_y : 0.5
 			text : 'Show BFS route'
+			on_press:
+				mazedisplay.compute_bfs()
 	Label : 
 		id : info_lbl
 		text: '[b][color=0f0c0c]Insert maze file in text input'
